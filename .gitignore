@@ -1,1 +1,53 @@
 openclaw-docs.md
+
+# Secrets / credentials - never commit
+.secrets/
+*.env
+*.key
+*.pem
+*.p12
+*.pfx
+*token*
+*secret*
+*credential*
+
+# OpenClaw/runtime state that can contain private chats, auth, DBs, logs
+.openclaw/
+../agents/
+../cron/
+../tasks/
+../flows/
+../logs/
+../memory/*.sqlite
+*.sqlite
+*.sqlite3
+*.db
+*.jsonl
+*.log
+
+# Python / node / caches
+.venv*/
+venv/
+__pycache__/
+*.pyc
+node_modules/
+.cache/
+.pytest_cache/
+
+# Temporary/generated media
+/tmp/
+tmp/
+*.mp3
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+
+# OS/editor
+.DS_Store
+*.swp
+
+# OpenClaw semantic-memory derived/cache files
+memory/.dreams/
