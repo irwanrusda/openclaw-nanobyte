@@ -55,3 +55,5 @@ pkill -f "openclaw gateway" || true
 ```
 
 If the old gateway runs under Docker/EasyPanel, stop or scale down the old app/container there. After that, restart the new OpenClaw gateway/container.
+
+This image includes `procps`, so `ps aux` is available for process checks inside the container. Docker commands are not expected to work inside the app container; use the EasyPanel UI or the host machine for container-level checks.
