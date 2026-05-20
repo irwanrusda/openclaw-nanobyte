@@ -2,7 +2,7 @@
 # OpenClaw — Simple VPS-Style Container for EasyPanel (ARM64)
 # =============================================================================
 # Usage:
-#   docker compose -f docker-compose.easypanel.yml up -d
+#   docker compose up -d
 #   docker exec -it openclaw bash
 #   openclaw onboard
 # =============================================================================
@@ -11,13 +11,13 @@ services:
   openclaw:
     build:
       context: .
-      dockerfile: Dockerfile.arm64
-    image: openclaw:arm64
+      dockerfile: Dockerfile
+    image: openclaw-nanobyte:latest
     container_name: openclaw
     volumes:
       - openclaw-data:/root/.openclaw
     ports:
-      - "18789:18789"
+      - "3000:3000"
     init: true
     restart: unless-stopped
 

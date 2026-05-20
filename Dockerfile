@@ -1,7 +1,8 @@
 FROM node:24-bookworm-slim
 
 ENV NODE_ENV=production \
-    OPENCLAW_STATE_DIR=/root/.openclaw
+    OPENCLAW_STATE_DIR=/root/.openclaw \
+    OPENCLAW_NPM_LOGLEVEL=warn
 
 # Basic runtime tools used by OpenClaw helpers and migration/restore commands.
 RUN apt-get update \
@@ -9,16 +10,24 @@ RUN apt-get update \
       ca-certificates \
       procps \
       nano \
+      vim \
+      htop \
       git \
       openssh-client \
       python3 \
+      python3-pip \
       curl \
       tar \
       gzip \
+      unzip \
+      rclone \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw CLI/runtime.
 RUN npm install -g openclaw@2026.5.7
+
+COPY scripts/easypanel-entrypoint.sh /usr/local/bin/easypanel-entrypoint
+RUN chmod +x /usr/local/bin/easypanel-entrypoint
 
 WORKDIR /root/.openclaw/workspace
 
@@ -38,4 +47,5 @@ RUN set -eu; \
 
 EXPOSE 3000 3001
 
+ENTRYPOINT ["easypanel-entrypoint"]
 CMD ["openclaw", "gateway", "run", "--bind", "lan", "--port", "3000"]
